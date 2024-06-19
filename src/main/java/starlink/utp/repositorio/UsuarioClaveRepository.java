@@ -7,4 +7,6 @@ import starlink.utp.entidad.seguridad.UsuarioClave;
 @Repository
 public interface UsuarioClaveRepository extends JpaRepository<UsuarioClave, Long> {
 
+    UsuarioClave findByUsuarioIdAndEstado(Long usuarioId, Boolean activo);
+
 }

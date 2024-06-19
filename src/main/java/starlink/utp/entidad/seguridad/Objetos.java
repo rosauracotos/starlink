@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,28 +15,30 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "usuariotipo", schema = "usuarios")
+@Table(name = "objetos", schema = "usuarios")
 @Getter
 @Setter
-public class UsuarioTipo implements Serializable {
+public class Objetos implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ust_id")
+    @Column(name = "obj_id")
     private Long id;
 
-    @Column(name = "ust_descri")
+    @Column(name = "obj_descri")
     private String descripcion;
 
-    @Column(name = "ust_abrevi")
-    private String abreviatura;
-
-    @Column(name = "ust_siglas")
-    private String siglas;
-
-    @Column(name = "ust_fecreg")
+    @Column(name = "obj_fecreg")
     private Timestamp fechaRegistro;
 
-    @Column(name = "ust_activo")
+    @Column(name = "obj_activo")
     private boolean activo;
+
+    @ManyToOne
+    @JoinColumn(name = "obj_idpadr")
+    private Objetos objetoPadre;
+
+    @Column(name = "obj_urlvis")
+    private String url;
+
 }

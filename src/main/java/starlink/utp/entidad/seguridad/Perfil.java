@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -18,36 +16,30 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "usuarioclave", schema = "usuarios")
+@Table(name = "perfil", schema = "usuarios")
 @Getter
 @Setter
-public class UsuarioClave implements Serializable {
+public class Perfil implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "usc_id")
+    @Column(name = "prf_id")
     private Long id;
 
-    @Column(name = "usc_numitm")
-    private Integer numItm;
-
-    @Column(name = "usc_passwd")
-    private String password;
+    @Column(name = "prf_descri")
+    private String descripcion;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "usc_fecreg")
+    @Column(name = "prf_fecreg")
     private LocalDateTime fechaRegistro;
 
-    @Column(name = "usc_activo")
-    private boolean estado;
-
-    @ManyToOne
-    @JoinColumn(name = "usu_id")
-    private Usuarios usuario;
+    @Column(name = "prf_activo")
+    private boolean activo;
 
     @PrePersist
     protected void onCreate() {
         fechaRegistro = LocalDateTime.now();
-        estado = true;
+        activo = true;
     }
+
 }

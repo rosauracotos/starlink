@@ -7,4 +7,6 @@ import starlink.utp.entidad.seguridad.Usuarios;
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuarios, Long> {
 
+    Usuarios findByLoginAndEstadoTrue(String login);
+
 }

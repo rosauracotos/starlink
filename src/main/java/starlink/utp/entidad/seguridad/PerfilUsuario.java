@@ -18,36 +18,35 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "usuarioclave", schema = "usuarios")
+@Table(name = "perfilusuario", schema = "usuarios")
 @Getter
 @Setter
-public class UsuarioClave implements Serializable {
+public class PerfilUsuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "usc_id")
+    @Column(name = "pus_id")
     private Long id;
-
-    @Column(name = "usc_numitm")
-    private Integer numItm;
-
-    @Column(name = "usc_passwd")
-    private String password;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "usc_fecreg")
-    private LocalDateTime fechaRegistro;
-
-    @Column(name = "usc_activo")
-    private boolean estado;
 
     @ManyToOne
     @JoinColumn(name = "usu_id")
     private Usuarios usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "prf_id")
+    private Perfil perfil;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "pus_fecreg")
+    private LocalDateTime fechaRegistro;
+
+    @Column(name = "pus_activo")
+    private boolean activo;
+
     @PrePersist
     protected void onCreate() {
         fechaRegistro = LocalDateTime.now();
-        estado = true;
+        activo = true;
     }
+
 }
