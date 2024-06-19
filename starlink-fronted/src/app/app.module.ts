@@ -25,6 +25,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
+import {LoginComponent} from "./components/login/login.component";
+import {MenuComponent} from "./components/menu/menu.component";
+import {AsideComponent} from "./components/aside/aside.component";
+import {InicioComponent} from "./components/inicio/inicio.component";
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "bgsColor": "red",
@@ -58,6 +62,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    MenuComponent,
+    AsideComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

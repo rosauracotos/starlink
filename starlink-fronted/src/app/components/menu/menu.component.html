@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="fixed-toolbar">
+  <span>Perú Express</span>
+
+  <span class="example-spacer"></span>
+  <!-- Menú principal -->
+
+  <!-- Botón para el perfil -->
+  <span style="font-size: 13px">Bienvenido, {{ nombre }}</span>
+  <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="example-icon" aria-label="Profile">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <!-- Menú de perfil -->
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout_circle</mat-icon>
+      <span>Cerrar Sesión</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
