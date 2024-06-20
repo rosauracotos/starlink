@@ -64,4 +64,10 @@ export class TicketsComponent {
       }
     );
   }
+
+  redirectNuevoTicket() {
+    this.localStorageService.removeItem('ticketId');
+    this.localStorageService.setItem('ocultarBotonGuardar', false);
+    this.router.navigate(['/ticket-formulario']);
+  }
 }
