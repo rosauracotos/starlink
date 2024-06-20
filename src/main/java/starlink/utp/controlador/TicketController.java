@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import starlink.utp.entidad.ticket.Ticket;
 import starlink.utp.servicio.TicketService;
 import starlink.utp.util.RespuestaControlador;
+import starlink.utp.util.dto.TicketBusquedaRequestDTO;
 
 @RestController
 @RequestMapping("/api/ticket")
 public class TicketController {
-
 
     @Autowired
     private TicketService ticketService;
@@ -39,5 +39,10 @@ public class TicketController {
         }catch (Exception ex){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+    }
+
+    @PostMapping("/busquedaPagina")
+    public ResponseEntity<?> busquedaPaginada(@RequestBody TicketBusquedaRequestDTO dto) {
+        return ResponseEntity.ok(ticketService.busquedaPaginada(dto));
     }
 }
