@@ -18,6 +18,7 @@ public class UbigeoProvServiceImpl implements UbigeoProvService {
 
     @Autowired
     private UbigeoProvRepository ubigeoProvRepository;
+
     @Override
     public List<UbigeoProv> listarUbigeoProv() {
         return ubigeoProvRepository.findAll();
@@ -31,5 +32,10 @@ public class UbigeoProvServiceImpl implements UbigeoProvService {
     @Override
     public UbigeoProv findById(Long idUbigeoProv) {
         return ubigeoProvRepository.findById(idUbigeoProv).orElse(null);
+    }
+
+    @Override
+    public List<UbigeoProv> obtenerProvinciasPorDepartamento(Long idDepartamento) {
+        return ubigeoProvRepository.findByDepartamentoIdAndEstadoIsTrue(idDepartamento);
     }
 }

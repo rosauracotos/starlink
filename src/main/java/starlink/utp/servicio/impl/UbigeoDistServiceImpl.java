@@ -33,4 +33,9 @@ public class UbigeoDistServiceImpl implements UbigeoDistService {
     public UbigeoDist findById(Long idUbigeoDist) {
         return ubigeoDistRepository.findById(idUbigeoDist).orElse(null);
     }
+
+    @Override
+    public List<UbigeoDist> obtenerDistritosPorProvincia(Long idProvincia) {
+        return ubigeoDistRepository.findByProvinciaIdAndEstadoIsTrue(idProvincia);
+    }
 }

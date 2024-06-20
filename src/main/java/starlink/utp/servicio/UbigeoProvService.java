@@ -10,7 +10,9 @@ public interface UbigeoProvService {
 
     List<UbigeoProv> listarUbigeoProv();
 
-    public RespuestaControlador guardar (UbigeoProv ubigeoProv);
+    RespuestaControlador guardar (UbigeoProv ubigeoProv);
 
-    public abstract UbigeoProv findById(Long idUbigeoProv);
+    abstract UbigeoProv findById(Long idUbigeoProv);
+
+    List<UbigeoProv> obtenerProvinciasPorDepartamento(Long idDepartamento);
 }

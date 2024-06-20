@@ -9,7 +9,9 @@ public interface UbigeoDistService {
 
     List<UbigeoDist> findUbigeoDistByActivoTrue();
 
-    public RespuestaControlador guardar (UbigeoDist ubigeoDist);
+    RespuestaControlador guardar (UbigeoDist ubigeoDist);
 
-    public abstract UbigeoDist findById(Long idUbigeoDist);
+    abstract UbigeoDist findById(Long idUbigeoDist);
+
+    List<UbigeoDist> obtenerDistritosPorProvincia(Long idProvincia);
 }
