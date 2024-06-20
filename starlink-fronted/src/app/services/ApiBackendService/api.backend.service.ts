@@ -12,6 +12,37 @@ export class ApiBackendService {
   constructor(private http: HttpClient,
               private localStorageService: LocalStorageService) { }
 
+  obtenerTiposDocumentos(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(environment.apiUrl +`api/tipoDocumento/listar`, { headers: headers });
+  }
+
+  obtenerEstadosTickets(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(environment.apiUrl +`api/ticketEstado/listar`, { headers: headers });
+  }
+
+  busquedaPaginadaTickets(selectedTipoDocumento: string, nroDocumento:string, fechaInicio: string, fechaFin:string ,
+                          selectedEstadoTicket: any, nroTicket:any, max: number): Observable<any> {
+    const body = {
+      tipoDocumentoId: Utilidades.esNullOUndefinedoVacio(selectedTipoDocumento) ? null : selectedTipoDocumento,
+      numeroDocumento: Utilidades.esNullOUndefinedoVacio(nroDocumento) ? null : nroDocumento,
+      fechaInicio: Utilidades.esNullOUndefinedoVacio(fechaInicio) ? null : fechaInicio,
+      fechaFin: Utilidades.esNullOUndefinedoVacio(fechaFin) ? null : fechaFin,
+      estadoTicketId: Utilidades.esNullOUndefinedoVacio(selectedEstadoTicket) ? null : selectedEstadoTicket,
+      nroTicket: Utilidades.esNullOUndefinedoVacio(nroTicket) ? null : nroTicket,
+      max: max,
+      limite: 0,
+    };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(environment.apiUrl +`api/ticket/busquedaPagina`, body, { headers: headers });
+  }
 
   /*obtenerAreas(): Observable<any> {
     const headers = new HttpHeaders({
