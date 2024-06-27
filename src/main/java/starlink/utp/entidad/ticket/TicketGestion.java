@@ -22,11 +22,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class TicketGestion implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tig_id")
     private Long id;
-
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "tig_fecest")
@@ -35,15 +35,11 @@ public class TicketGestion implements Serializable {
     @Column(name = "tig_fecreg")
     private LocalDateTime fechaRegistro;
 
+    @Column(name = "tig_comentario")
+    private String comentario;
+
     @Column(name = "tig_activo")
     private boolean estado;
-
-    @PrePersist
-    protected void onCreate() {
-        fechaRegistro = LocalDateTime.now();
-        fechaEstado = LocalDateTime.now();
-        estado = true;
-    }
 
     @ManyToOne
     @JoinColumn(name = "tkt_id")
@@ -52,4 +48,11 @@ public class TicketGestion implements Serializable {
     @ManyToOne
     @JoinColumn(name = "tie_id")
     private TicketEstado ticketEstado;
+
+    @PrePersist
+    protected void onCreate() {
+        fechaRegistro = LocalDateTime.now();
+        fechaEstado = LocalDateTime.now();
+        estado = true;
+    }
 }

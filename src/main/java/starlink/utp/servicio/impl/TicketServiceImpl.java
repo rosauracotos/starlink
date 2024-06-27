@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import starlink.utp.entidad.persona.Persona;
 import starlink.utp.entidad.ticket.Ticket;
 import starlink.utp.entidad.ticket.TicketEstado;
+import starlink.utp.entidad.ticket.TicketGestion;
 import starlink.utp.repositorio.PersonaRepository;
+import starlink.utp.repositorio.TicketGestionRepository;
 import starlink.utp.repositorio.TicketRepository;
+import starlink.utp.servicio.EmailService;
 import starlink.utp.servicio.TicketService;
 import starlink.utp.util.RespuestaControlador;
 import starlink.utp.util.RespuestaControladorServicio;
@@ -29,6 +32,12 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     private PersonaRepository personaRepository;
 
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private TicketGestionRepository ticketGestionRepository;
+
     @Override
     public List<Ticket> listarTicketActivos() {
         return ticketRepository.findAll();
@@ -42,9 +51,23 @@ public class TicketServiceImpl implements TicketService {
         ticket.setTicketEstado(ticketEstado);
         ticket.setNumero(obtenerSiguienteNroTicket());
         ticketRepository.save(ticket);
+
+        TicketGestion ticketGestion = new TicketGestion();
+        ticketGestion.setTicket(ticket);
+        ticketGestion.setTicketEstado(ticketEstado);
+        ticketGestion.setComentario("Ticket Registrado");
+        ticketGestionRepository.save(ticketGestion);
+
         Persona persona = personaRepository.findById(ticket.getPersona().getId()).orElse(null);
         persona.setDireccion(ticket.getPersona().getDireccion());
         personaRepository.save(persona);
+
+        String mensaje = "Estimado(a) " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno() + " " + persona.getNombre() +
+                ", se ha registrado su Ticket Nro: "+ ticket.getNumero() + "\n" + "\n" +
+                " Descripción : " + ticket.getAsunto();
+
+        emailService.enviarCorreo(persona.getCorreo(), "Ticket N° " + ticket.getNumero() , mensaje);
+
         respuestaControlador = respuestaControladorServicio.obtenerRespuestaDeExitoCrear("Ticket ");
         return respuestaControlador;
     }
