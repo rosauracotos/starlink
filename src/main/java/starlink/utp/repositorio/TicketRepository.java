@@ -22,7 +22,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
             "LEFT OUTER JOIN master.tipodocide tdc ON per.tdi_id = tdc.tdi_id " +
             "WHERE (:tipoDocumentoId IS NULL OR tdc.tdi_id = :tipoDocumentoId) " +
             "AND (:numeroDocumento IS NULL OR per.per_numdoi = :numeroDocumento) " +
-            "AND (tck.tkt_fectkt BETWEEN (:fechaInicio)::DATE AND (:fechaFin)::DATE ) " +
+            "AND (:fechaInicio IS NULL OR (tck.tkt_fectkt >= (:fechaInicio)::DATE)) " +
+            "AND (:fechaFin IS NULL OR (tck.tkt_fectkt < (:fechaInicio)::DATE)) " +
             "AND (:estadoTicketId IS NULL OR tes.tie_id = :estadoTicketId) " +
             "AND (:nroTicket IS NULL OR tck.tkt_numero = :nroTicket) " +
             "LIMIT :maximo OFFSET :limite "
@@ -45,7 +46,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
             "LEFT OUTER JOIN master.tipodocide tdc ON per.tdi_id = tdc.tdi_id " +
             "WHERE (:tipoDocumentoId IS NULL OR tdc.tdi_id = :tipoDocumentoId) " +
             "AND (:numeroDocumento IS NULL OR per.per_numdoi = :numeroDocumento) " +
-            "AND (tck.tkt_fectkt BETWEEN (:fechaInicio)::DATE AND (:fechaFin)::DATE ) " +
+            "AND (:fechaInicio IS NULL OR (tck.tkt_fectkt >= (:fechaInicio)::DATE)) " +
+            "AND (:fechaFin IS NULL OR (tck.tkt_fectkt < (:fechaInicio)::DATE)) " +
             "AND (:estadoTicketId IS NULL OR tes.tie_id = :estadoTicketId) " +
             "AND (:nroTicket IS NULL OR tck.tkt_numero = :nroTicket) "
             ,nativeQuery = true)
@@ -56,6 +58,9 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
             @Param("fechaFin") String fechaFin,
             @Param("estadoTicketId") Long estadoTicketId,
             @Param("nroTicket") Long nroTicket);
+
+    @Query("SELECT COUNT(c) FROM Ticket c")
+    long contarTickets();
 
 
 }

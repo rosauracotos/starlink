@@ -26,6 +26,34 @@ export class ApiBackendService {
     return this.http.get<any>(environment.apiUrl +`api/ticketEstado/listar`, { headers: headers });
   }
 
+  obtenerTiposTickets(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(environment.apiUrl +`api/ticketTipo/listar`, { headers: headers });
+  }
+
+  obtenerDepartamentos(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(environment.apiUrl +`api/ubigeoDepartamento/listar`, { headers: headers });
+  }
+
+  obtenerProvinciasPorDepartamento(departamentoId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(environment.apiUrl +`api/ubigeoProvincia/departamento/`+ departamentoId, { headers: headers });
+  }
+
+  obtenerDistrirosPorProvincia(provinciaId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(environment.apiUrl +`api/ubigeoDistrito/provincia/`+ provinciaId, { headers: headers });
+  }
+
   busquedaPaginadaTickets(selectedTipoDocumento: string, nroDocumento:string, fechaInicio: string, fechaFin:string ,
                           selectedEstadoTicket: any, nroTicket:any, max: number): Observable<any> {
     const body = {
@@ -42,6 +70,34 @@ export class ApiBackendService {
       'Content-Type': 'application/json'
     });
     return this.http.post<any>(environment.apiUrl +`api/ticket/busquedaPagina`, body, { headers: headers });
+  }
+
+  buscarPersonaPorDocumento(nroDocumento: string, tipoDocumento: number): Observable<any> {
+    const params = new HttpParams()
+      .set('nroDocumento', nroDocumento)
+      .set('tipodocumento', tipoDocumento);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(environment.apiUrl +`api/persona/buscarNroDocumento`, { params: params, headers: headers });
+  }
+
+  guardarTicket(personaId: number, direccion: string, ticketTipoSeleccionado: number, descripcion: string): Observable<any> {
+    const body = {
+      persona: {
+        id: personaId,
+        direccion: direccion
+      },
+      ticketTipo: {
+        id: ticketTipoSeleccionado
+      },
+      asunto: descripcion
+    };
+    console.log(body);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(environment.apiUrl +`api/ticket/guardar`, body, { headers: headers });
   }
 
   /*obtenerAreas(): Observable<any> {

@@ -9,7 +9,9 @@ public interface PersonaService {
 
     List<Persona> findPersonaByActivoTrue();
 
-    public RespuestaControlador guardar (Persona persona);
+    RespuestaControlador guardar (Persona persona);
 
-    public abstract Persona findById(Long idPersona);
+    Persona findById(Long idPersona);
+
+    Persona findByNroDocumento(String nroDocumento, Long tipodocumento);
 }

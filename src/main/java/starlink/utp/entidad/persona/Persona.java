@@ -52,7 +52,6 @@ public class Persona implements Serializable {
     @Column(name = "per_direcc")
     private String direccion;
 
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "per_fecreg")
     private LocalDateTime fechaRegistro;
@@ -74,10 +73,8 @@ public class Persona implements Serializable {
     @JoinColumn(name = "tge_id")
     private TipoGenero tipoGenero;
 
-
     @ManyToOne
     @JoinColumn(name = "udi_id")
     private UbigeoDist distrito;
-
 
 }

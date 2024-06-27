@@ -1,0 +1,121 @@
+<app-menu></app-menu>
+<app-aside></app-aside>
+<div class="main-centrado">
+  <br>
+  <br>
+  <div class="pagetitle container-center">
+    <h1>REGISTRO/EDICIÓN DE TICKETS</h1>
+  </div>
+  <div class="pagetitle">
+    <h3>Datos Personales</h3>
+  </div>
+
+  <mat-card>
+    <mat-card-content>
+      <form #formPersonalForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="card-container">
+          <div class="card-wrapper">
+            <mat-form-field class="example-full-width custom-mat-select">
+              <mat-label>Tipo Documento</mat-label>
+              <mat-select [(ngModel)]="selectedTipoDocumento" name="tipoDocumento" required [disabled]="isReadOnly" >
+                @for (tipoDocumento of tiposDocumentos; track tipoDocumento) {
+                  <mat-option [value]="tipoDocumento.id">{{tipoDocumento.siglas}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="card-wrapper">
+            <mat-form-field appearance="outline" class="example-full-width custom-mat-select">
+              <mat-label>Número Documento</mat-label>
+              <input matInput placeholder="Número Documento" [(ngModel)]="numeroDocumento" (ngModelChange)="onNroDocumentoChange()" required name="numeroDocumento" type="text" pattern="\d*" maxlength="12" [disabled]="isReadOnly">
+            </mat-form-field>
+          </div>
+          <div class="card-wrapper">
+            <mat-form-field appearance="outline" class="example-full-width custom-mat-select">
+              <mat-label>Celular</mat-label>
+              <input matInput placeholder="Celular" [(ngModel)]="celular" required name="celular" type="text" pattern="\d*" maxlength="9" [disabled]="true">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="card-container">
+          <div class="card-wrapper2">
+            <mat-form-field appearance="outline" class="example-full-width custom-mat-select">
+              <mat-label>Persona</mat-label>
+              <input matInput placeholder="Celular" [(ngModel)]="nombrecompleto" required name="nombrecompleto" type="text" pattern="\d*" maxlength="9" [disabled]="true">
+            </mat-form-field>
+          </div>
+          <div class="card-wrapper">
+            <mat-form-field appearance="outline" class="example-full-width custom-mat-select">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Celular" [(ngModel)]="email" required name="email" type="text" pattern="\d*" maxlength="9" [disabled]="true">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="card-container">
+          <div class="card-wrapper">
+            <mat-form-field class="example-full-width custom-mat-select">
+              <mat-label>Departamento</mat-label>
+              <mat-select [(ngModel)]="selectedDepartamento" required name="departamento" (selectionChange)="onDepartamentoSelectionChange($event)" [disabled]="true">
+                @for (departamento of departamentos; track departamento) {
+                  <mat-option [value]="departamento.id">{{departamento.descripcion}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="card-wrapper">
+            <mat-form-field class="example-full-width custom-mat-select">
+              <mat-label>Provincia</mat-label>
+              <mat-select [(ngModel)]="selectedProvincia" required name="provincia" (selectionChange)="onProvinciaSelectionChange($event)" [disabled]="true">
+                @for (provincia of provincias; track provincia) {
+                  <mat-option [value]="provincia.id">{{provincia.descripcion}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="card-wrapper">
+            <mat-form-field class="example-full-width custom-mat-select">
+              <mat-label>Distrito</mat-label>
+              <mat-select [(ngModel)]="selectedDistrito" name="distrito" required [disabled]="true">
+                @for (distrito of distritos; track distrito) {
+                  <mat-option [value]="distrito.id">{{distrito.descripcion}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="card-container">
+          <div class="card-wrapper-total">
+            <mat-form-field appearance="outline" class="example-full-width custom-mat-select">
+              <mat-label>Dirección</mat-label>
+              <input matInput placeholder="Dirección" [(ngModel)]="direccion" required name="direccion" type="text" [disabled]="isReadOnly">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="card-container">
+          <div class="card-wrapper">
+            <mat-form-field class="example-full-width custom-mat-select">
+              <mat-label>Tipo de Atención</mat-label>
+              <mat-select [(ngModel)]="selectedTipoTicket" name="tipoTicket" required [disabled]="isReadOnly">
+                @for (tipoTicket of tiposTickets; track tipoTicket) {
+                  <mat-option [value]="tipoTicket.id">{{tipoTicket.descripcion}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="card-container">
+          <div class="card-wrapper-total">
+            <mat-form-field appearance="outline" class="example-full-width custom-mat-select">
+              <mat-label>Descripción</mat-label>
+              <textarea  matInput placeholder="Descripción" [(ngModel)]="descripcion" required name="descripcion" type="text" [disabled]="isReadOnly"> </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <button mat-flat-button *ngIf="!ocultarBotonGuardar" [disabled]="!formPersonalForm.form.valid" color="primary">Guardar</button>
+        <span style="margin-left: 10px; margin-right: 10px;"></span>
+        <button mat-flat-button color="warn" (click)="cancelar()">Cancelar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+</div>

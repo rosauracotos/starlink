@@ -1,6 +1,5 @@
 package starlink.utp.controlador;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import starlink.utp.entidad.persona.Persona;
 import starlink.utp.servicio.PersonaService;
@@ -29,6 +29,12 @@ public class PersonaController {
     @GetMapping("/buscar/{id}")
     public ResponseEntity<?> obtenerPersonaId(@PathVariable("id") Long personaId) {
         return ResponseEntity.ok(personaService.findById(personaId));
+    }
+
+    @GetMapping("/buscarNroDocumento")
+    public ResponseEntity<?> obtenerPersonaId(@RequestParam("nroDocumento") String nroDocumento,
+                                              @RequestParam("tipodocumento") Long tipodocumento) {
+        return ResponseEntity.ok(personaService.findByNroDocumento(nroDocumento, tipodocumento));
     }
 
     @PostMapping("/guardar")

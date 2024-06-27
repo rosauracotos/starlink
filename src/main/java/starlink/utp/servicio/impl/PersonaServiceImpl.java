@@ -35,4 +35,10 @@ public class PersonaServiceImpl implements PersonaService {
     public Persona findById(Long idPersona) {
         return personaRepository.findById(idPersona).orElse(null);
     }
+
+    @Override
+    public Persona findByNroDocumento(String nroDocumento, Long tipodocumento) {
+        return personaRepository.findByNumeroDocumentoAndTipoDocumentoIdAndEstadoIsTrue(nroDocumento, tipodocumento);
+    }
+
 }

@@ -18,6 +18,7 @@ import starlink.utp.entidad.persona.Persona;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "ticket", schema = "tickets")
@@ -33,23 +34,14 @@ public class Ticket implements Serializable {
     @Column(name = "tkt_numero")
     private Integer numero;
 
-
-
     @Column(name = "tkt_fectkt")
     private LocalDate fechaRegistro;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "tkt_hortkt")
-    private LocalDateTime horaRegistro;
+    private LocalTime horaRegistro;
 
     @Column(name = "tie_asunto")
     private String asunto;
-
-    @PrePersist
-    protected void onCreate() {
-        horaRegistro = LocalDateTime.now();
-        fechaRegistro = LocalDate.now();
-    }
 
     @ManyToOne
     @JoinColumn(name = "tit_id")
@@ -62,4 +54,10 @@ public class Ticket implements Serializable {
     @ManyToOne
     @JoinColumn(name = "per_id")
     private Persona persona;
+
+    @PrePersist
+    protected void onCreate() {
+        horaRegistro = LocalTime.now();
+        fechaRegistro = LocalDate.now();
+    }
 }

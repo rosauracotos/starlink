@@ -30,6 +30,7 @@ import {MenuComponent} from "./components/menu/menu.component";
 import {AsideComponent} from "./components/aside/aside.component";
 import {InicioComponent} from "./components/inicio/inicio.component";
 import {TicketsComponent} from "./components/tickets/tickets.component";
+import {TicketsFormularioComponent} from "./components/tickets-formulario/tickets-formulario.component";
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "bgsColor": "red",
@@ -67,7 +68,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MenuComponent,
     AsideComponent,
     InicioComponent,
-    TicketsComponent
+    TicketsComponent,
+    TicketsFormularioComponent
   ],
   imports: [
     BrowserModule,
