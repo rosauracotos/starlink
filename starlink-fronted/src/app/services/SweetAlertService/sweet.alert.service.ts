@@ -25,6 +25,16 @@ export class SweetAlertService {
     return Swal.fire(options);
   }
 
+  showAlertWarning(mensaje:string): Promise<any> {
+    let options:SweetAlertOptions = {
+      title: 'Alerta',
+      text: mensaje,
+      icon: 'warning',
+      confirmButtonText: 'OK',
+    }
+    return Swal.fire(options);
+  }
+
   showAlertPregunta(pregunta:string, textoBotonAceptar: string): Promise<any> {
     let options:SweetAlertOptions = {
       title: pregunta,

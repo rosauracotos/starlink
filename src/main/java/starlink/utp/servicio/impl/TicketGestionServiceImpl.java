@@ -2,8 +2,10 @@ package starlink.utp.servicio.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import starlink.utp.entidad.ticket.Ticket;
 import starlink.utp.entidad.ticket.TicketGestion;
 import starlink.utp.repositorio.TicketGestionRepository;
+import starlink.utp.repositorio.TicketRepository;
 import starlink.utp.servicio.TicketGestionService;
 import starlink.utp.util.RespuestaControlador;
 import starlink.utp.util.RespuestaControladorServicio;
@@ -18,6 +20,10 @@ public class TicketGestionServiceImpl implements TicketGestionService {
 
     @Autowired
     private TicketGestionRepository ticketGestionRepository;
+
+    @Autowired
+    private TicketRepository ticketRepository;
+
     @Override
     public List<TicketGestion> listarTicketGestionActivos() {
         return ticketGestionRepository.findTicketGestionByEstadoTrue();
@@ -27,6 +33,10 @@ public class TicketGestionServiceImpl implements TicketGestionService {
     public RespuestaControlador guardar(TicketGestion ticketGestion) {
         RespuestaControlador respuestaControlador;
         ticketGestionRepository.save(ticketGestion);
+        Ticket ticket = ticketRepository.getOne(ticketGestion.getTicket().getId());
+        ticket.setTicketEstado(ticketGestion.getTicketEstado());
+        ticketRepository.save(ticket);
+        // Enviar correo luego se implementa
         respuestaControlador = respuestaControladorServicio.obtenerRespuestaDeExitoCrear("Ticket Gestion");
         return respuestaControlador;
     }

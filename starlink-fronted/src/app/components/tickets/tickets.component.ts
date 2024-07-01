@@ -70,4 +70,10 @@ export class TicketsComponent {
     this.localStorageService.setItem('ocultarBotonGuardar', false);
     this.router.navigate(['/ticket-formulario']);
   }
+
+  editarTicket(ticket: TicketDto) {
+    this.localStorageService.setItem('ticketId', ticket.id);
+    this.router.navigate(['/ticket-formulario']);
+  }
+
 }

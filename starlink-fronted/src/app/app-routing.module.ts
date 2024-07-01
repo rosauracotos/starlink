@@ -6,6 +6,7 @@ import {TicketsComponent} from "./components/tickets/tickets.component";
 import {TicketsFormularioComponent} from "./components/tickets-formulario/tickets-formulario.component";
 import {GestionComponent} from "./components/gestion/gestion.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {TicketGestionComponent} from "./components/ticket-gestion/ticket-gestion.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'gestion', component: GestionComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'inicio', component: InicioComponent },
+  { path: 'ticket-gestion', component: TicketGestionComponent },
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
 ];
 

@@ -4,7 +4,7 @@
   <br>
   <br>
   <div class="pagetitle container-center">
-    <h1>MANTENIMIENTO DE EMPLEADOS</h1>
+    <h1>MANTENIMIENTO DE TICKETS</h1>
   </div>
   <div class="pagetitle">
     <h3>Filtro de Busqueda</h3>
@@ -15,10 +15,10 @@
         <div class="card-container">
           <div class="card-wrapper">
             <mat-form-field class="example-full-width custom-mat-select">
-              <mat-label>Área</mat-label>
+              <mat-label>Tipo Documento</mat-label>
               <mat-select [(ngModel)]="selectedTipoDocumento" name="tipodocumento">
                 @for (tipodocumento of tiposDocumentos; track tipodocumento) {
-                  <mat-option [value]="tipodocumento.id">{{tipodocumento.descripcion}}</mat-option>
+                  <mat-option [value]="tipodocumento.id">{{tipodocumento.siglas}}</mat-option>
                 }
               </mat-select>
             </mat-form-field>

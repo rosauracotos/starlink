@@ -1,0 +1,38 @@
+<app-menu></app-menu>
+<app-aside></app-aside>
+<div class="main-centrado">
+  <br>
+  <br>
+  <div class="pagetitle container-center">
+    <h1>ESTADO DE TICKETS</h1>
+  </div>
+  <mat-card>
+    <mat-card-content>
+      <form #formGestionTicket="ngForm" (ngSubmit)="onSubmit()">
+        <div class="card-container">
+          <div class="card-wrapper-total">
+            <mat-form-field class="example-full-width custom-mat-select">
+              <mat-label>Estado</mat-label>
+              <mat-select [(ngModel)]="selectedEstadoTicket" name="estado" required >
+                @for (estado of estadosTickets; track estado) {
+                  <mat-option [value]="estado.id">{{estado.descripcion}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="card-container">
+          <div class="card-wrapper-total">
+            <mat-form-field appearance="outline" class="example-full-width custom-mat-select">
+              <mat-label>Observaciones</mat-label>
+              <textarea  matInput placeholder="Descripción" [(ngModel)]="comentario" required name="descripcion" type="text"> </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <button mat-flat-button [disabled]="!formGestionTicket.form.valid" color="primary">Guardar</button>
+        <span style="margin-left: 10px; margin-right: 10px;"></span>
+        <button mat-flat-button color="warn" (click)="cancelar()">Cancelar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

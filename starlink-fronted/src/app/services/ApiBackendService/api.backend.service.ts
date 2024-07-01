@@ -100,6 +100,46 @@ export class ApiBackendService {
     return this.http.post<any>(environment.apiUrl +`api/ticket/guardar`, body, { headers: headers });
   }
 
+  editarTicket(tickectId:number, personaId: number, direccion: string, ticketTipoSeleccionado: number, descripcion: string): Observable<any> {
+    const body = {
+      persona: {
+        id: personaId,
+        direccion: direccion
+      },
+      ticketTipo: {
+        id: ticketTipoSeleccionado
+      },
+      asunto: descripcion
+    };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.put<any>(environment.apiUrl +`api/ticket/editar/` + tickectId, body, { headers: headers });
+  }
+
+  guardarGestionTicket(ticketId: number, comentario: string, estadoTicketSeleccionado: number): Observable<any> {
+    const body = {
+      ticket: {
+        id: ticketId
+      },
+      ticketEstado: {
+        id: estadoTicketSeleccionado
+      },
+      comentario: comentario
+    };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(environment.apiUrl +`api/ticketGestion/guardarGestion`, body, { headers: headers });
+  }
+
+  obtenerTicketPorId(ticketId: number):Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(environment.apiUrl +`api/ticket/buscar/`+ ticketId, { headers: headers });
+  }
+
   /*obtenerAreas(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'

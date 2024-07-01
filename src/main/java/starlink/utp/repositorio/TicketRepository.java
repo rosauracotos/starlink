@@ -13,7 +13,7 @@ import java.util.Map;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-    @Query(value = "SELECT tck.tkt_numero as numticket, CONCAT(per.per_apepat,' ',per.per_apemat,' ',per.per_nombre) as persona, " +
+    @Query(value = "SELECT tck.tkt_id as id, tck.tkt_numero as numticket, CONCAT(per.per_apepat,' ',per.per_apemat,' ',per.per_nombre) as persona, " +
             "ttp.tit_descri as tipoticket, tck.tkt_fectkt as fechaticket, tes.tie_descri as estadoticket " +
             "FROM tickets.ticket tck " +
             "LEFT OUTER JOIN tickets.tickettipo ttp ON tck.tit_id = ttp.tit_id " +

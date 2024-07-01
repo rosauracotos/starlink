@@ -66,10 +66,13 @@ export class GestionComponent {
     );
   }
 
-  redirectNuevoTicket() {
-    this.localStorageService.removeItem('ticketId');
-    this.localStorageService.setItem('ocultarBotonGuardar', false);
-    this.router.navigate(['/ticket-formulario']);
+  atenderTicket(ticket:TicketDto ) {
+    if (ticket.estadoticket == 'CERRADO') {
+      this.sweetAlertService.showAlertWarning("El ticket ya se encuentra en estado CERRADO");
+      return;
+    }
+    this.localStorageService.setItem('ticketId', ticket.id);
+    this.router.navigate(['/ticket-gestion']);
   }
 
 }

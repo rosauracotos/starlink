@@ -13,7 +13,7 @@ public interface TicketService {
 
     public RespuestaControlador guardar (Ticket ticket);
 
-    public RespuestaControlador actualizar (Ticket ticket);
+    public RespuestaControlador actualizar (Ticket ticket, String direccion);
 
     public Ticket findById(Long idTicket);
 

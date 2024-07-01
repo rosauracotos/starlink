@@ -70,7 +70,7 @@ export class TicketsFormularioComponent {
     this.ticketId = this.localStorageService.getItem("ticketId");
     this.ocultarBotonGuardar = this.localStorageService.getItem("ocultarBotonGuardar");
     if (!Utilidades.esNullOUndefinedoVacio(this.ticketId)) {
-      //this.obtenerDatosColaborador(this.colaboradorId);
+      this.obtenerDatosTicket(this.ticketId);
     }
     this.route.queryParams.subscribe(params => {
       this.isReadOnly = params['readOnly'] === 'true';
@@ -152,10 +152,64 @@ export class TicketsFormularioComponent {
   }
 
   onSubmit() {
-    this.apiBackendService.guardarTicket(this.personaId, this.direccion, this.selectedTipoTicket, this.descripcion).subscribe(
-      (response) =>{
-        this.sweetAlertService.showAlertSuccess(response.mensaje);
-        this.router.navigate(['/tickets'])
+    if (!Utilidades.esNullOUndefinedoVacio(this.ticketId)) {
+      this.apiBackendService.editarTicket(this.ticketId, this.personaId, this.direccion, this.selectedTipoTicket, this.descripcion).subscribe(
+        (response) =>{
+          this.sweetAlertService.showAlertSuccess(response.mensaje);
+          this.localStorageService.removeItem('ticketId');
+          this.router.navigate(['/tickets'])
+        },
+        (error) => {
+          this.sweetAlertService.showAlertError("Ocurrió un error al conectar al servidor");
+        }
+      );
+    } else {
+      this.apiBackendService.guardarTicket(this.personaId, this.direccion, this.selectedTipoTicket, this.descripcion).subscribe(
+        (response) =>{
+          this.sweetAlertService.showAlertSuccess(response.mensaje);
+          this.router.navigate(['/tickets'])
+        },
+        (error) => {
+          this.sweetAlertService.showAlertError("Ocurrió un error al conectar al servidor");
+        }
+      );
+    }
+  }
+
+  obtenerDatosTicket(ticketId: any){
+    this.apiBackendService.obtenerTicketPorId(ticketId).subscribe(
+      (response) => {
+        this.numeroDocumento = response.persona.numeroDocumento;
+        this.celular = response.persona.telefono;
+        this.nombrecompleto = response.persona.apellidoPaterno + " " + response.persona.apellidoMaterno + " " + response.persona.nombres;
+        this.email = response.persona.correo;
+        this.direccion = response.persona.direccion;
+        this.descripcion = response.asunto;
+        this.personaId = response.persona.id;
+        this.selectedTipoDocumento = response.persona.tipoDocumento.id;
+        this.selectedTipoTicket = response.ticketTipo.id;
+        this.selectedDistrito = response.persona.distrito.id;
+        this.selectedDepartamento = response.persona.distrito.provincia.departamento.id;
+        this.selectedProvincia = response.persona.distrito.provincia.id;
+
+        this.apiBackendService.obtenerProvinciasPorDepartamento(this.selectedDepartamento).subscribe(
+          (response) => {
+            this.provincias = response;
+          },
+          (error) => {
+            this.sweetAlertService.showAlertError("Ocurrió un error al conectar al servidor");
+          }
+        );
+
+        this.apiBackendService.obtenerDistrirosPorProvincia(this.selectedProvincia).subscribe(
+          (response) => {
+            this.distritos = response;
+          },
+          (error) => {
+            this.sweetAlertService.showAlertError("Ocurrió un error al conectar al servidor");
+          }
+        );
+
       },
       (error) => {
         this.sweetAlertService.showAlertError("Ocurrió un error al conectar al servidor");

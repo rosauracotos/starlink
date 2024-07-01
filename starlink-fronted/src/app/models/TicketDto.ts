@@ -1,4 +1,5 @@
 export class TicketDto {
+  id: number;
   numticket: number;
   persona: string;
   tipoticket: string;
@@ -6,6 +7,7 @@ export class TicketDto {
   estadoticket: string;
 
   constructor(data:any) {
+    this.id = data.id;
     this.numticket = data.numticket;
     this.persona = data.persona;
     this.tipoticket = data.tipoticket;

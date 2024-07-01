@@ -31,8 +31,8 @@ public class TicketGestionController {
         return ResponseEntity.ok(ticketGestionService.findById(ticketGestionId));
     }
 
-    @PostMapping("/guardar")
-    public ResponseEntity<?> guardar (@RequestBody TicketGestion ticketGestion){
+    @PostMapping("/guardarGestion")
+    public ResponseEntity<?> registrarGestion(@RequestBody TicketGestion ticketGestion){
         try {
             RespuestaControlador rc = ticketGestionService.guardar(ticketGestion);
             return ResponseEntity.ok(rc);

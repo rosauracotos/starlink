@@ -73,8 +73,16 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public RespuestaControlador actualizar(Ticket ticket) {
-        return null;
+    public RespuestaControlador actualizar(Ticket ticket, String direccion) {
+        RespuestaControlador respuestaControlador;
+        ticketRepository.save(ticket);
+        respuestaControlador = respuestaControladorServicio.obtenerRespuestaDeExitoActualizar("Ticket");
+
+        Persona persona = personaRepository.findById(ticket.getPersona().getId()).orElse(null);
+        persona.setDireccion(direccion);
+        personaRepository.save(persona);
+
+        return respuestaControlador;
     }
 
     @Override
