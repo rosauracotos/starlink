@@ -57,7 +57,7 @@
           </div>
           <div class="card-wrapper1">
             <mat-form-field class="example-full-width custom-mat-select">
-              <mat-label>Condición Laboral</mat-label>
+              <mat-label>Estado Ticket</mat-label>
               <mat-select [(ngModel)]="selectedEstadoTicket" name="grupo">
                 @for (estado of estadosTickets; track estado) {
                   <mat-option [value]="estado.id">{{estado.descripcion}}</mat-option>
