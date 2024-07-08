@@ -17,6 +17,7 @@ import starlink.utp.util.dto.TicketBusquedaRequestDTO;
 import starlink.utp.util.dto.TicketBusquedaResponseDTO;
 import starlink.utp.util.enums.EstadoTicketEnum;
 
+import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public RespuestaControlador guardar(Ticket ticket) {
+    public RespuestaControlador guardar(Ticket ticket) throws MessagingException {
         RespuestaControlador respuestaControlador;
         TicketEstado ticketEstado = new TicketEstado();
         ticketEstado.setId(EstadoTicketEnum.REGISTRADO.getId());
@@ -66,7 +67,7 @@ public class TicketServiceImpl implements TicketService {
                 ", se ha registrado su Ticket Nro: "+ ticket.getNumero() + "\n" + "\n" +
                 " Descripción : " + ticket.getAsunto();
 
-        emailService.enviarCorreo(persona.getCorreo(), "Ticket N° " + ticket.getNumero() , mensaje);
+        emailService.sendEmail(persona.getCorreo(), "Ticket N° " + ticket.getNumero() , mensaje);
 
         respuestaControlador = respuestaControladorServicio.obtenerRespuestaDeExitoCrear("Ticket ");
         return respuestaControlador;
