@@ -1,7 +1,9 @@
 package starlink.utp.servicio;
 
+import javax.mail.MessagingException;
+
 public interface EmailService {
 
-    void enviarCorreo(String destinatario, String asunto, String cuerpo);
+    void sendEmail(String to, String subject, String body) throws MessagingException;
 
 }
