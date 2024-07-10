@@ -35,6 +35,9 @@ export class LoginComponent {
           this.localStorageService.setItem('menuData', response.extraInfo.detalle);
           this.localStorageService.setItem('numeroIdentificacion', response.extraInfo.numeroIdentificacionUsuarioLogueado);
           this.localStorageService.setItem('nombreUsuarioLogueado', response.extraInfo.nombreUsuarioLogueado);
+          this.localStorageService.setItem('personaId', response.extraInfo.personaId);
+          this.localStorageService.setItem('tipoDocumentoId', response.extraInfo.tipoDocumentoId);
+          this.localStorageService.setItem('numeroDocumento', response.extraInfo.numeroDocumento);
           this.router.navigate(['/inicio']);
         } else {
           this.sweetAlertService.showAlertError(response.mensaje);

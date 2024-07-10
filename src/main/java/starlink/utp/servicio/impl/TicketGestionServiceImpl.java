@@ -11,6 +11,7 @@ import starlink.utp.util.RespuestaControlador;
 import starlink.utp.util.RespuestaControladorServicio;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TicketGestionServiceImpl implements TicketGestionService {
@@ -49,5 +50,10 @@ public class TicketGestionServiceImpl implements TicketGestionService {
     @Override
     public TicketGestion findById(Long idTicketGestion) {
         return ticketGestionRepository.findById(idTicketGestion).orElse(null);
+    }
+
+    @Override
+    public List<Map<String, Object>> obtenerEstadosPorTicket(Long ticketId) {
+        return ticketGestionRepository.findEstadosGestionPorTicket(ticketId);
     }
 }

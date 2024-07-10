@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {TicketDto} from "../../models/TicketDto";
 import {ApiBackendService} from "../../services/ApiBackendService/api.backend.service";
 import {SweetAlertService} from "../../services/SweetAlertService/sweet.alert.service";
 import {LocalStorageService} from "../../services/LocalStorageService/local.storage.service";
 import {Router} from "@angular/router";
+import {TicketDialogComponent} from "../ticket-dialog/ticket-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +15,7 @@ import {Router} from "@angular/router";
 })
 export class DashboardComponent {
 
-  displayedColumns: string[] = ['numticket','persona','tipoticket','fechaticket', 'estadoticket'];
+  displayedColumns: string[] = ['numticket','persona','tipoticket','fechaticket', 'estadoticket', 'acciones'];
   dataSource = new MatTableDataSource<TicketDto>();
 
   tiposDocumentos : any[] = [];
@@ -22,13 +24,15 @@ export class DashboardComponent {
   selectedEstadoTicket: any;
   nroTicket: any;
   nroDocumento: any;
+  nombreUsuarioLogueado: any;
   fechaInicio: string = '';
   fechaFin: string = '';
 
   constructor(private apiBackendService: ApiBackendService,
               private sweetAlertService: SweetAlertService,
               private localStorageService: LocalStorageService,
-              private router: Router) {}
+              private router: Router,
+              private dialog: MatDialog ) {}
 
   ngOnInit() {
 
@@ -49,7 +53,10 @@ export class DashboardComponent {
         this.sweetAlertService.showAlertError("Ocurrió un error al conectar al servidor");
       }
     );
-
+    this.selectedTipoDocumento = this.localStorageService.getItem('tipoDocumentoId');
+    this.nroDocumento = this.localStorageService.getItem('numeroDocumento');
+    this.nombreUsuarioLogueado = this.localStorageService.getItem('nombreUsuarioLogueado');
+    this.localStorageService.removeItem('ticketId');
     this.onSubmit();
   }
 
@@ -66,10 +73,9 @@ export class DashboardComponent {
     );
   }
 
-  redirectNuevoTicket() {
-    this.localStorageService.removeItem('ticketId');
-    this.localStorageService.setItem('ocultarBotonGuardar', false);
-    this.router.navigate(['/ticket-formulario']);
+  openDialog(ticket: TicketDto) {
+    this.localStorageService.setItem('ticketId', ticket.id);
+    const dialogRef = this.dialog.open(TicketDialogComponent);
   }
 
 }

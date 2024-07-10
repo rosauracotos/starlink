@@ -16,7 +16,7 @@
           <div class="card-wrapper">
             <mat-form-field class="example-full-width custom-mat-select">
               <mat-label>Tipo Documento</mat-label>
-              <mat-select [(ngModel)]="selectedTipoDocumento" name="tipodocumento">
+              <mat-select [(ngModel)]="selectedTipoDocumento" name="tipodocumento" [disabled]="true">
                 @for (tipodocumento of tiposDocumentos; track tipodocumento) {
                   <mat-option [value]="tipodocumento.id">{{tipodocumento.siglas}}</mat-option>
                 }
@@ -26,13 +26,13 @@
           <div class="card-wrapper">
             <mat-form-field appearance="outline" class="example-full-width custom-mat-select">
               <mat-label>Número Documento</mat-label>
-              <input matInput placeholder="Número Documento" [(ngModel)]="nroDocumento" name="numeroDocumento" type="text" pattern="\d*" maxlength="12">
+              <input matInput placeholder="Número Documento" [(ngModel)]="nroDocumento" name="numeroDocumento" type="text" [disabled]="true">
             </mat-form-field>
           </div>
           <div class="card-wrapper">
             <mat-form-field appearance="outline" class="example-full-width custom-mat-select">
-              <mat-label>Número Documento</mat-label>
-              <input matInput placeholder="Número Documento" [(ngModel)]="nroDocumento" name="numeroDocumento2" type="text" pattern="\d*" maxlength="12">
+              <mat-label>Nombre</mat-label>
+              <input matInput placeholder="Nombre" [(ngModel)]="nombreUsuarioLogueado" name="nombre" type="text" [disabled]= "true">
             </mat-form-field>
           </div>
         </div>
@@ -101,6 +101,16 @@
     <ng-container matColumnDef="estadoticket">
       <th mat-header-cell *matHeaderCellDef>Estado</th>
       <td mat-cell *matCellDef="let ticket"> {{ticket.estadoticket}} </td>
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let ticket">
+        <span class="acciones-container">
+          <a mat-menu-item matTooltip="Ver detalle">
+            <img src="../../../assets/detalle.svg" alt="Editar" class="icono-editar" (click)="openDialog(ticket)">
+          </a>
+        </span>
+      </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
