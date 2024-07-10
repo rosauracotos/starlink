@@ -31,6 +31,11 @@ public class TicketGestionController {
         return ResponseEntity.ok(ticketGestionService.findById(ticketGestionId));
     }
 
+    @GetMapping("/ticket/{id}")
+    public ResponseEntity<?> obtenerEstadoDeTciket(@PathVariable("id") Long ticketId) {
+        return ResponseEntity.ok(ticketGestionService.obtenerEstadosPorTicket(ticketId));
+    }
+
     @PostMapping("/guardarGestion")
     public ResponseEntity<?> registrarGestion(@RequestBody TicketGestion ticketGestion){
         try {

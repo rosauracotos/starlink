@@ -26,6 +26,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
             "AND (:fechaFin IS NULL OR (tck.tkt_fectkt < (:fechaInicio)::DATE)) " +
             "AND (:estadoTicketId IS NULL OR tes.tie_id = :estadoTicketId) " +
             "AND (:nroTicket IS NULL OR tck.tkt_numero = :nroTicket) " +
+            "ORDER BY tck.tkt_numero DESC " +
             "LIMIT :maximo OFFSET :limite "
             ,nativeQuery = true)
     List<Map<String, Object>> busquedaPaginadaTicket(

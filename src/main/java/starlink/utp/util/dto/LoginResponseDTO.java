@@ -10,6 +10,9 @@ import java.util.List;
 public class LoginResponseDTO {
 
     private String nombreUsuarioLogueado;
+    private Long personaId;
+    private Long tipoDocumentoId;
+    private String numeroDocumento;
     private String numeroIdentificacionUsuarioLogueado;
     private List<ObjetosMenuResponseDTO> detalle;
 

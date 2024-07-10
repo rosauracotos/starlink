@@ -35,6 +35,9 @@ export class AuthService {
     this.localStorageService.removeItem('menuData');
     this.localStorageService.removeItem('numeroIdentificacion');
     this.localStorageService.removeItem('nombreUsuarioLogueado');
+    this.localStorageService.removeItem('personaId');
+    this.localStorageService.removeItem('tipoDocumentoId');
+    this.localStorageService.removeItem('numeroDocumento');
     this.router.navigate(['/']);
   }
 

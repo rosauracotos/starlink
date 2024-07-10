@@ -34,6 +34,8 @@ import {TicketsFormularioComponent} from "./components/tickets-formulario/ticket
 import {GestionComponent} from "./components/gestion/gestion.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {TicketGestionComponent} from "./components/ticket-gestion/ticket-gestion.component";
+import {TicketDialogComponent} from "./components/ticket-dialog/ticket-dialog.component";
+import {MatDialogModule} from "@angular/material/dialog";
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "bgsColor": "red",
@@ -75,7 +77,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     TicketsFormularioComponent,
     GestionComponent,
     DashboardComponent,
-    TicketGestionComponent
+    TicketGestionComponent,
+    TicketDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatFormFieldModule,
     MatDatepickerModule,
     MatCheckbox,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule
   ],
   providers: [
     {
