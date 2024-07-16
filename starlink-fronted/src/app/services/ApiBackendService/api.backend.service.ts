@@ -26,6 +26,13 @@ export class ApiBackendService {
     return this.http.get<any>(environment.apiUrl +`api/ticketEstado/listar`, { headers: headers });
   }
 
+  obtenerEstadosTicketsLibresPorTicket(ticketId: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(environment.apiUrl +`api/ticketEstado/listarlibresPorTicket/` + ticketId, { headers: headers });
+  }
+
   obtenerTiposTickets(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'

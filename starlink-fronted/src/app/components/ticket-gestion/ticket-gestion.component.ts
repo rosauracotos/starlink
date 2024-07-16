@@ -23,7 +23,7 @@ export class TicketGestionComponent {
 
   ngOnInit() {
     this.ticketId = this.localStorageService.getItem("ticketId");
-    this.apiBackendService.obtenerEstadosTickets().subscribe(
+    this.apiBackendService.obtenerEstadosTicketsLibresPorTicket(this.ticketId).subscribe(
       (response) => {
         this.estadosTickets = response;
       },

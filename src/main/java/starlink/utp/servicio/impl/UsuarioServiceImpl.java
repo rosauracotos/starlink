@@ -45,7 +45,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 if (claveUsuario.getPassword().equals(loginRequestDTO.getPassword())) {
                     List<ObjetosMenuResponseDTO> listado = obtenerMenuUsuarioLogueado(usuario);
                     LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
-                    if(usuario != null) {
+                    if(usuario != null && usuario.getPersona() != null) {
                         loginResponseDTO.setPersonaId(usuario.getPersona().getId());
                         loginResponseDTO.setTipoDocumentoId(usuario.getPersona().getTipoDocumento().getId());
                         loginResponseDTO.setNumeroDocumento(usuario.getPersona().getNumeroDocumento());
