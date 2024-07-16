@@ -14,4 +14,6 @@ public interface TicketEstadoService {
     public RespuestaControlador actualizar (TicketEstado ticketEstado);
 
     public TicketEstado findById(Long idTicketEstado);
+
+    public List<TicketEstado> listarTicketEstadoLibres(Long ticketId);
 }

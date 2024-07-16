@@ -7,6 +7,7 @@ import {LocalStorageService} from "../../services/LocalStorageService/local.stor
 import {Router} from "@angular/router";
 import {TicketDialogComponent} from "../ticket-dialog/ticket-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {TicketReporteComponent} from "../ticket-reporte/ticket-reporte.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,7 @@ export class DashboardComponent {
 
   displayedColumns: string[] = ['numticket','persona','tipoticket','fechaticket', 'estadoticket', 'acciones'];
   dataSource = new MatTableDataSource<TicketDto>();
+  pdfBase64 = '';
 
   tiposDocumentos : any[] = [];
   estadosTickets : any[] = [];
@@ -31,7 +33,6 @@ export class DashboardComponent {
   constructor(private apiBackendService: ApiBackendService,
               private sweetAlertService: SweetAlertService,
               private localStorageService: LocalStorageService,
-              private router: Router,
               private dialog: MatDialog ) {}
 
   ngOnInit() {
@@ -76,6 +77,13 @@ export class DashboardComponent {
   openDialog(ticket: TicketDto) {
     this.localStorageService.setItem('ticketId', ticket.id);
     const dialogRef = this.dialog.open(TicketDialogComponent);
+  }
+
+  openDialogReporte(ticket: TicketDto) {
+    this.localStorageService.setItem('ticketId', ticket.id);
+    const dialogRef = this.dialog.open(TicketReporteComponent,{
+      width: '1200px',
+    });
   }
 
 }

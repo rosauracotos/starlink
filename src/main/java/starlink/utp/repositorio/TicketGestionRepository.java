@@ -24,4 +24,6 @@ public interface TicketGestionRepository extends JpaRepository<TicketGestion, Lo
             "ORDER BY tg.tig_id "
             ,nativeQuery = true)
     List<Map<String, Object>> findEstadosGestionPorTicket(@Param("ticketId") Long ticketId);
+
+    List<TicketGestion> findByTicketIdAndEstadoTrue(Long ticketId);
 }

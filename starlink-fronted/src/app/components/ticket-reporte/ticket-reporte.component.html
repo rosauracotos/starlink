@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Reporte de Ticket</h2>
+<mat-dialog-content class="mat-typography">
+  <br>
+  <br>
+  <ngx-extended-pdf-viewer [base64Src]="pdfBase64"
+                           useBrowserLocale="true"
+                           [showToolbar]="true"
+                           height="100%" style="width: 100%"></ngx-extended-pdf-viewer>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

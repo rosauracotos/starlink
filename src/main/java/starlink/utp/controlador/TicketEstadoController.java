@@ -20,6 +20,11 @@ public class TicketEstadoController {
         return ResponseEntity.ok(ticketEstadoService.listarTicketEstadoActivos());
     }
 
+    @GetMapping("/listarlibresPorTicket/{ticketId}")
+    public ResponseEntity<?> listarLibresPorTicket(@PathVariable("ticketId") Long ticketId){
+        return ResponseEntity.ok(ticketEstadoService.listarTicketEstadoLibres(ticketId));
+    }
+
     @GetMapping("/buscar/{id}")
     public ResponseEntity<?> obtenerTicketEstadoId(@PathVariable("id") Long ticketEstadoId) {
         return ResponseEntity.ok(ticketEstadoService.findById(ticketEstadoId));

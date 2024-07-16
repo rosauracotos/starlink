@@ -1,0 +1,4 @@
+::ng-deep .mat-dialog-container {
+  min-width: 80%; /* Ajusta según sea necesario */
+  height: 80%; /* Ajusta según sea necesario */
+}
