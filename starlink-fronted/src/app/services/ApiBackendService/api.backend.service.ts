@@ -147,5 +147,18 @@ export class ApiBackendService {
     return this.http.get<any>(environment.apiUrl +`api/ticketGestion/ticket/`+ ticketId, { headers: headers });
   }
 
+  visualizarReportePDF(ticket: number): Observable<Blob> {
+
+    const params = new HttpParams()
+      .set('reportName', "ticket_seguimiento")
+    const body = {
+      ticketid: ticket
+    };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(environment.apiUrl +`api/reports/generate`, body,{ headers: headers, params: params,  responseType: 'blob' as 'json' });
+  }
+
 
 }

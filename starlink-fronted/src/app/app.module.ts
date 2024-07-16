@@ -36,6 +36,8 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {TicketGestionComponent} from "./components/ticket-gestion/ticket-gestion.component";
 import {TicketDialogComponent} from "./components/ticket-dialog/ticket-dialog.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
+import {TicketReporteComponent} from "./components/ticket-reporte/ticket-reporte.component";
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "bgsColor": "red",
@@ -78,7 +80,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     GestionComponent,
     DashboardComponent,
     TicketGestionComponent,
-    TicketDialogComponent
+    TicketDialogComponent,
+    TicketReporteComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +107,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatDatepickerModule,
     MatCheckbox,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxExtendedPdfViewerModule
   ],
   providers: [
     {
