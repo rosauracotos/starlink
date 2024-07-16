@@ -36,7 +36,7 @@ export class TicketGestionComponent {
   onSubmit() {
     this.apiBackendService.guardarGestionTicket(this.ticketId, this.comentario, this.selectedEstadoTicket).subscribe(
       (response) =>{
-        this.sweetAlertService.showAlertSuccess(response.mensaje);
+        this.sweetAlertService.showAlertSuccess("Se envió satisfactoriamente información del estado del Ticket");
         this.localStorageService.removeItem('ticketId');
         this.router.navigate(['/gestion'])
       },

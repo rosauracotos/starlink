@@ -166,7 +166,7 @@ export class TicketsFormularioComponent {
     } else {
       this.apiBackendService.guardarTicket(this.personaId, this.direccion, this.selectedTipoTicket, this.descripcion).subscribe(
         (response) =>{
-          this.sweetAlertService.showAlertSuccess(response.mensaje);
+          this.sweetAlertService.showAlertSuccess("Se envió satisfactoriamente información del Ticket a " + this.email);
           this.router.navigate(['/tickets'])
         },
         (error) => {
