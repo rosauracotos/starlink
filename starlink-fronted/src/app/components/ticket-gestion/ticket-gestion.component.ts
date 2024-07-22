@@ -18,7 +18,6 @@ export class TicketGestionComponent {
   constructor(private apiBackendService: ApiBackendService,
               private sweetAlertService: SweetAlertService,
               private localStorageService: LocalStorageService,
-              private route: ActivatedRoute,
               private router: Router) {}
 
   ngOnInit() {

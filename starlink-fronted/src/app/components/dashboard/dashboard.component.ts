@@ -18,7 +18,6 @@ export class DashboardComponent {
 
   displayedColumns: string[] = ['numticket','persona','tipoticket','fechaticket', 'estadoticket', 'acciones'];
   dataSource = new MatTableDataSource<TicketDto>();
-  pdfBase64 = '';
 
   tiposDocumentos : any[] = [];
   estadosTickets : any[] = [];
