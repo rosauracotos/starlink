@@ -49,7 +49,6 @@ export class AuthService {
     } else {
       isAuthenticated = data || false;
     }
-    console.log(isAuthenticated);
     return isAuthenticated;
   }
 }

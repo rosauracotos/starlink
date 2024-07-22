@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import {ApiBackendService} from "../../services/ApiBackendService/api.backend.service";
 import {SweetAlertService} from "../../services/SweetAlertService/sweet.alert.service";
 import {LocalStorageService} from "../../services/LocalStorageService/local.storage.service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
-import {TicketDto} from "../../models/TicketDto";
 import {TicketEstadoDto} from "../../models/TicketEstadoDto";
 
 @Component({
@@ -21,9 +19,7 @@ export class TicketDialogComponent {
 
   constructor(private apiBackendService: ApiBackendService,
               private sweetAlertService: SweetAlertService,
-              private localStorageService: LocalStorageService,
-              private route: ActivatedRoute,
-              private router: Router) {}
+              private localStorageService: LocalStorageService) {}
 
   ngOnInit() {
     this.ticketId = this.localStorageService.getItem("ticketId");

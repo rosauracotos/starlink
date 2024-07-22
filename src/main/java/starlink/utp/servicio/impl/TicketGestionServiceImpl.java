@@ -49,7 +49,7 @@ public class TicketGestionServiceImpl implements TicketGestionService {
         // Enviar correo luego se implementa
         String mensaje = "Estimado(a) " + ticket.getPersona().getApellidoPaterno() + " " + ticket.getPersona().getApellidoMaterno() + " " + ticket.getPersona().getNombre() +
                 ", se ha actualizado su Ticket Nro: "+ ticket.getNumero() + "\n" + "\n" +
-                " Estado : " + ticketGestion.getTicketEstado() + "\n" +
+                " Estado : " + ticketGestion.getTicketEstado().getDescripcion() + "\n" +
                 " Comentario:" + ticketGestion.getComentario();
 
         emailService.sendEmail(ticket.getPersona().getCorreo(), "Actualización Ticket N° " + ticket.getNumero() , mensaje);

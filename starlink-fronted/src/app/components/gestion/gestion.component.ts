@@ -57,8 +57,8 @@ export class GestionComponent {
     this.apiBackendService.busquedaPaginadaTickets(this.selectedTipoDocumento, this.nroDocumento, this.fechaInicio,
       this.fechaFin, this.selectedEstadoTicket, this.nroTicket, 100).subscribe(
       (response) =>{
-        const colaboradores: TicketDto[] = response.data.map((data: any) => new TicketDto(data));
-        this.dataSource.data = colaboradores;
+        const tickets: TicketDto[] = response.data.map((data: any) => new TicketDto(data));
+        this.dataSource.data = tickets;
       },
       (error) => {
         this.sweetAlertService.showAlertError("Ocurrió un error al conectar al servidor");
