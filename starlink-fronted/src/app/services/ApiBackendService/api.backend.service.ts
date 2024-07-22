@@ -100,7 +100,6 @@ export class ApiBackendService {
       },
       asunto: descripcion
     };
-    console.log(body);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });

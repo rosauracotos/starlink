@@ -24,7 +24,6 @@ export class TicketReporteComponent {
         reader.readAsDataURL(blob);
         reader.onloadend = () => {
           this.pdfBase64 = (reader.result as string).split(',')[1];
-          console.log( this.pdfBase64);
         };
       },
       (error) => {
